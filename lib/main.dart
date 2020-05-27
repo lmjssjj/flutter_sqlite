@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttersqlite/db/test_dao.dart';
+import 'package:fluttersqlite/model/test_model.dart';
+import 'package:sqlite_viewer/sqlite_viewer.dart';
 
 void main() => runApp(MyApp());
 
@@ -45,6 +48,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  TestDao dao = TestDao();
+
+  void _insert() {
+    Test test = Test();
+    test.name = "name,$_counter";
+    test.value = _counter;
+    test.numb = 0.0;
+    dao.rawInsert(test);
+    dao.insert(test);
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -98,6 +111,18 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
+
+            RaisedButton(
+              child: Text("insert"),
+              onPressed: _insert,
+            ),
+            RaisedButton(
+              child: Text("show"),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (_) => DatabaseList()));
+              },
+            ),
+
           ],
         ),
       ),

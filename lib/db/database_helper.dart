@@ -3,7 +3,7 @@ import 'package:path/path.dart';
 
 class DatabaseHelper {
   //数据库名
-  static const String _DB_NAME = "";
+  static const String _DB_NAME = "test.db";
 
   //数据库版本号
   static const int _DB_VERSION = 1;
@@ -37,11 +37,14 @@ class DatabaseHelper {
   /*创建数据库表*/
   void _onCreate(Database db, int version) async {
     await db.execute(
-        'CREATE TABLE Test (id INTEGER PRIMARY KEY, name TEXT, value INTEGER, num REAL)');
+        'CREATE TABLE Test (id INTEGER PRIMARY KEY, name TEXT, value INTEGER, numb REAL)');
   }
 
   /*数据库版本升级*/
   void _onUpgrade(Database db, int oldVersion, int newVersion) {
     print("oldVersion:$oldVersion;newVersion:$newVersion");
   }
+
+  Future close() async => _database.close();
+
 }

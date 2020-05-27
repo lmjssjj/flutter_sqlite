@@ -17,7 +17,7 @@ class TestDao extends Dao {
           [test.name, test.value, test.numb]);
       print('inserted2: $id2');
     });
-    db.close();
+//    db.close();
   }
 
   rawUpdate(Test test) async {
@@ -26,14 +26,14 @@ class TestDao extends Dao {
         'UPDATE Test SET name = ?, value = ? WHERE name = ?',
         [test.name, '9876', 'some name']);
     print('updated: $count');
-    db.close();
+//    db.close();
   }
 
   rawQuery() async {
     Database db = await DatabaseHelper.mDatabaseHelper.database;
     List<Map> list = await db.rawQuery('SELECT * FROM Test');
     print(list);
-    db.close();
+//    db.close();
   }
 
   count() async {
@@ -41,7 +41,7 @@ class TestDao extends Dao {
     int count =
         Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM Test'));
 //    assert(count == 2);
-    db.close();
+//    db.close();
   }
 
   rawDelete() async {
@@ -50,13 +50,13 @@ class TestDao extends Dao {
         await db.rawDelete('DELETE FROM Test WHERE name = ?', ['another name']);
     assert(count == 1);
     print(count);
-    db.close();
+//    db.close();
   }
 
   insert(Test test) async {
     Database db = await DatabaseHelper.mDatabaseHelper.database;
     test.id = await db.insert("Test", test.toMap());
-    db.close();
+//    db.close();
     return test;
   }
 
